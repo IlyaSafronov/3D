@@ -24,9 +24,11 @@ pre {
   --selector: var(--pink);
   --property: var(--teal);
   --punctuation: var(--white);
+  --undefined: var(--white);
 
   font-size: 3rem;
   font-weight: bold;
+  color: var(--undefined);
   background: hsl(222, 45%, 7%);
   padding: 2rem;
   border-radius: 1rem;
@@ -35,6 +37,37 @@ pre {
   transform-style: preserve-3d;
   transform: perspective(5000px) rotateY(var(--rotateX)) rotateX(var(--rotateY));
 }
+
+pre > * {
+  text-shadow: 0 0 0.3em currentColor;
+}
+
+pre::before,
+pre::after {
+  content: '';
+  position: absolute;
+  border-radius: inherit;
+}
+
+/* ! shadow */
+pre::before {
+  inset: 0.75rem;
+  border-radius: inherit;
+  background: #000;
+  z-index: -1;
+  transform: translateZ(-50px);
+  filter: blur(15px);
+  opacity: 0.5;
+}
+
+/* ? gradient thingy */
+pre::after {
+  z-index: -2;
+  inset: -1rem;
+  background: linear-gradient(-45deg, red, blue);
+  transform: translateZ(-50px);
+}
+
 
 .selector {
   color: var(--selector);
@@ -51,23 +84,4 @@ pre {
 .property + .punctuation {
   color: var(--property);
 }
-
-pre > * {
-  text-shadow: 0 0 3em currentColor;
-}
-
-pre::before {
-  inset: 0.75rem;
-  background: #000;
-  z-index: -1;
-  transform: translateZ(-49px);
-  filter: blur(15px);
-  opacity: 0.5;
-}
-
-/* ? gradient */
-pre::after {
-  inset: -1rem;
-  background: linear-gradient(-45deg, red, blue);
-  transform: translateZ(-50px);
-}
+ 
